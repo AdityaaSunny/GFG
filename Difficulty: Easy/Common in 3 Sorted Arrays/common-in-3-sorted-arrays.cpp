@@ -7,11 +7,10 @@ using namespace std;
 class Solution {
   public:
     // Function to find common elements in three arrays.
-    vector<int> commonElements(vector<int> &a, vector<int> &b,
-                               vector<int> &c) {
+    vector<int> commonElements(vector<int> &a, vector<int> &b, vector<int> &c) {
         // Code Here
         vector<int>ans;
-         set<int> st;
+        set<int> st;
            int i ,j,k;
            i=j=k=0;
             while(i<a.size() && j<b.size() && k<c.size()){
@@ -34,10 +33,8 @@ class Solution {
            for(auto i : st){
                ans.push_back(i);
            }
-           return ans;
-            
-                                   
-                               }
+           return ans;   
+    }
 };
 
 //{ Driver Code Starts.
