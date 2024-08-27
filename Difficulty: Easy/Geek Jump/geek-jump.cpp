@@ -5,31 +5,25 @@ using namespace std;
 
 // } Driver Code Ends
 class Solution {
-  private:
-  int solve(int index, vector<int>& height, int n, vector<int>& dp) {
-        
-        if (index >= n - 1) {
+  public: 
+    int fs(int ind, vector<int>& heights, vector<int>& dp){
+        if(ind==0){
             return 0;
         }
-        if (dp[index] != -1) {
-            return dp[index];
+        if(dp[ind]!=-1) return dp[ind];
+        
+        int left = fs(ind-1,heights,dp)+abs(heights[ind]-heights[ind-1]);
+        int right = INT_MAX;
+        if(ind>1) {
+            right= fs(ind-2,heights,dp)+abs(heights[ind]-heights[ind-2]);
         }
-        int oneStep = INT_MAX;
-        int twoStep = INT_MAX;
-        if ( (index + 1) <= n - 1 )
-             oneStep = abs(height[index] - height[index + 1]) + solve(index + 1, height, n, dp);
-        if ((index + 2) <= n - 1)
-            twoStep = abs(height[index] - height[index + 2]) + solve(index + 2, height, n, dp);
-        
-        return dp[index] = min(oneStep, twoStep);
-        
+        return dp[ind]= min(left,right);
     }
-    public:
-    int minimumEnergy(vector<int>& height, int n) {
+    int minimumEnergy(vector<int>& heights, int n) {
         // Code here
-        int index = 0;
-        vector<int> dp(n + 1, -1);
-        return solve(index, height, n, dp);
+        vector<int> dp(n+1,-1);
+        
+        return fs(n-1, heights,dp);
     }
 };
 
